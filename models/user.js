@@ -1,0 +1,1 @@
+//Will input user criteria (id, name, email, password and bcrypt hash)
