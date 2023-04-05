@@ -1,7 +1,7 @@
 //Will input user criteria (id, name, email, password and bcrypt hash)
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../config/connection.js");
+const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
 class User extends Model{}
 User.init(
