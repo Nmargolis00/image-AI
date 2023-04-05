@@ -1,10 +1,8 @@
 const router = require('express').Router();
-const imageRoute=require('./api/imageRoutes')
-const userRoute=require('./api/userRoutes')
-const homeRoutes=require('./homeRoutes')
+const homeRoutes=require('./homeRoutes');
+const apiRoutes = require('./api/');
 
-router.use('/api',imageRoute)
+router.use('/api',apiRoutes)
 router.use('/',homeRoutes)
-router.use('/api',userRoute)
 
 module.exports=router
