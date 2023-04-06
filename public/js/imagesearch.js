@@ -24,6 +24,7 @@ const imageSearch = async (event) => {
           } else {
            const data=await response.json()
             console.log(data)
+        window.location.replace('/api/getimages')
          
           }
     } catch (error) {
