@@ -20,10 +20,10 @@ router.post("/getimages", async (req, res) => {
       n:5,
       size: req.body.size,
     });
-    //const images=response.data.data
-  // res.render("images",{images})
+    const images=response.data.data
+  res.render("images",{images})
   
-    res.status(200).json(response.data.data);
+    //res.status(200).json(response.data.data);
   } catch (error) {
     res.status(500).json(error);
   }
