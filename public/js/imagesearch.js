@@ -1,5 +1,8 @@
+
+import axios  from 'axios';
 const imageSearch = async (event) => {
-  //  event.preventDefault();
+
+    event.preventDefault();
   // prompt: "cat",
   // n: 1,
   // size: "1024x1024",
@@ -11,22 +14,32 @@ const imageSearch = async (event) => {
   // console.log(myboj)
 //console.log({prompt, n,size })
   if (prompt  && size) {
- 
+    const response =  axios({
+        method: 'post',
+        url: '/login',
+        data: {
+            prompt:prompt,
+            size:size
+        }
+      });
+   
     try {
-        const response = await fetch("api/getimages", {
+        const response = await fetch("/api/image/getimages", {
             method: "POST",
             body: JSON.stringify({prompt,size}),
             headers: { "Content-Type": "application/json" },
           });
-      
-          if (!response.ok) {
-           throw new Error('NO IMAGE')
-          } else {
-           const data=await response.json()
-            console.log(data)
-        window.location.replace('/api/getimages')
+     
+    //       if (response.ok) {
+        const data= response.json()
+       console.log(data)
+    //       } 
+        //   else {
+    //       
+    //         console.log(data)
+    //    // window.location.replace('/api/getimages')
          
-          }
+    //       }
     } catch (error) {
        console.log(error)
     }
