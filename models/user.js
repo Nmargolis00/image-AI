@@ -3,7 +3,13 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
-class User extends Model{}
+// const { validate } = require("json-schema");
+// const { update } = require("lodash");
+class User extends Model{
+    checkPassword(loginPassword) {
+        return bcrypt.compareSync(loginPassword, this.password);
+    }
+}
 User.init(
     {
         id:{
@@ -12,11 +18,7 @@ User.init(
             autoIncrement: true,
             allowNull: false,
         },
-        first_name:{
-            type: DataTypes.STRING(100),
-            allowNull:false
-        },
-        last_name:{
+        user_name:{
             type: DataTypes.STRING(100),
             allowNull:false
         },
@@ -30,17 +32,30 @@ User.init(
         },
         password:{
             type: DataTypes.STRING,
-            allowNull:false
-        }
-    }
-    ,
+            allowNull:false,
+            validate: {
+                len: [8]
+            },
+        },
+    },
+
     {
-        
+     hooks: {
+        beforeCreate: async (newUserPass) => {
+            newUserPass.password = await bcrypt.hash(newUserPass.password, 10);
+            return newUserPass;
+        },
+        //* If we decided to include updating a password 
+        // beforeUpdate: async (updateUserPass) => {
+        //     updateUserPass.password = await bcrypt.hash(updateUserPass.password, 10);
+        //     return updateUserPass;
+        // },
+     },   
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: "user",
+        modelName: "User",
       }
-)
-module.exports=User
+);
+module.exports = User;
