@@ -1,17 +1,23 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
+//At /api/users
+
+
+//Get users
+router.get('/', async (req, res) => {
+    const userData = await User.findAll()
+    res.status(200).json(userData);
+})
 
 
 //post user info for sign up
 router.post('/', async (req, res) => {
     try {
-       const userData = await User.create({user_name: req.body.user_name, password: req.body.password, email: req.body.email});
+       const userData = await User.create(req.body);
 
        req.session.save(() => {
-
-      
-       req.session.user_id = userData.id;
+    req.session.user_id = userData.id;
        req.session.user_name = userData.user_name;
        req.session.email = userData.email;
        req.session.logged_in = true;
@@ -23,12 +29,27 @@ router.post('/', async (req, res) => {
     }
 });
 
+// router.post('/', async (req, res) => {
+//     try {
+//       const userData = await User.create(req.body);
+  
+//       req.session.save(() => {
+//         req.session.user_id = userData.id;
+//         req.session.logged_in = true;
+  
+//         res.status(200).json(userData);
+//       });
+//     } catch (err) {
+//       res.status(400).json(err);
+//     }
+//   });
+
 //Post route for login
 router.post('/login', async (req, res) => {
     try {
         const userLogin = await User.findOne({
             where: {
-                user_name: req.body.user_name,
+                email: req.body.email,
             }
         })
         if(!userLogin){
@@ -42,9 +63,9 @@ router.post('/login', async (req, res) => {
         } 
         req.session.save(() => {
             req.session.user_id = userLogin.id
-            req.session.user_name = userLogin.user_name;
+            req.session.email = userLogin.email;
             req.session.logged_in = true;
-            res.json({userLogin, message: 'Welcome in!'})
+            res.json({user: userLogin, message: 'Welcome in!'})
         })
     } catch (error) {
         res.status(400).json(error);
