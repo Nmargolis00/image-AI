@@ -23,28 +23,28 @@ const loginFormHandler = async (event) => {
   };
   
   //This should first take you to a new page and then gather the information below. Once you sign up, you are redirected back to main page where you can log in
-  const signupFormHandler = async (event) => {
-    event.preventDefault();
+  // const signupFormHandler = async (event) => {
+  //   event.preventDefault();
   
-    //The IDs will need to match when the handlebars signup page is built
-    const name = document.querySelector('#name-signup').value.trim();
-    const email = document.querySelector('#email-signup').value.trim();
-    const password = document.querySelector('#password-signup').value.trim();
+  //   //The IDs will need to match when the handlebars signup page is built
+  //   const name = document.querySelector('#name-signup').value.trim();
+  //   const email = document.querySelector('#email-signup').value.trim();
+  //   const password = document.querySelector('#password-signup').value.trim();
   
-    if (name && email && password) {
-      const response = await fetch('/api/users', {
-        method: 'POST',
-        body: JSON.stringify({ name, email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
+  //   if (name && email && password) {
+  //     const response = await fetch('/api/users', {
+  //       method: 'POST',
+  //       body: JSON.stringify({ name, email, password }),
+  //       headers: { 'Content-Type': 'application/json' },
+  //     });
   
-      if (response.ok) {
-        document.location.replace('/');
-      } else {
-        alert(response.statusText);
-      }
-    }
-  };
+  //     if (response.ok) {
+  //       document.location.replace('/');
+  //     } else {
+  //       alert(response.statusText);
+  //     }
+  //   }
+  // };
   
   document
     .querySelector('.login-form')
