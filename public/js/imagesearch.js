@@ -13,12 +13,12 @@ const imageSearch = async (event) => {
   if (prompt  && size) {
  
     try {
-        const response = await fetch("api/getimages", {
+        const response = await fetch("api/image/getimages", {
             method: "POST",
             body: JSON.stringify({prompt,size}),
             headers: { "Content-Type": "application/json" },
           });
-      
+      console.log(response)
           if (!response.ok) {
            throw new Error('NO IMAGE')
           } else {
