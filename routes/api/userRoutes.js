@@ -29,20 +29,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// router.post('/', async (req, res) => {
-//     try {
-//       const userData = await User.create(req.body);
-  
-//       req.session.save(() => {
-//         req.session.user_id = userData.id;
-//         req.session.logged_in = true;
-  
-//         res.status(200).json(userData);
-//       });
-//     } catch (err) {
-//       res.status(400).json(err);
-//     }
-//   });
 
 //Post route for login
 router.post('/login', async (req, res) => {
@@ -91,7 +77,7 @@ router.get('/login', async (req, res) =>{
 
 //get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
 
-router.get('/images', withAuth, async (req, res) => {
+router.get('/images', async (req, res) => {
     try {
         const userImages = await Image.findAll({
             where: {
@@ -104,7 +90,7 @@ router.get('/images', withAuth, async (req, res) => {
     })
     } catch (error) {
         res.status(400).json(error);
-        res.redirect('login');
+        // res.redirect('login');
     }
   
 })
@@ -128,6 +114,5 @@ router.delete('/image/:id', withAuth, async (req, res) => {
         res.redirect('login');
     }
 })
-
 
 module.exports=router

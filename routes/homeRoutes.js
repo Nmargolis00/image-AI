@@ -10,5 +10,8 @@ router.get('/images',(req,res)=>{
     res.render('homepage')
 })
 
+router.get('/home',(req,res)=>{
+    res.render('homepage')
+})
 
 module.exports=router

@@ -24,11 +24,16 @@ const imageSearch = async (event) => {
       });
    
     try {
+<<<<<<< HEAD
         const response = await fetch("/api/image/getimages", {
+=======
+        const response = await fetch("api/image/getimages", {
+>>>>>>> 7ca59076fa81445c45e56ea647f963cc056dcf6b
             method: "POST",
             body: JSON.stringify({prompt,size}),
             headers: { "Content-Type": "application/json" },
           });
+<<<<<<< HEAD
      
     //       if (response.ok) {
         const data= response.json()
@@ -38,6 +43,15 @@ const imageSearch = async (event) => {
     //       
     //         console.log(data)
     //    // window.location.replace('/api/getimages')
+=======
+      console.log(response)
+          if (!response.ok) {
+           throw new Error('NO IMAGE')
+          } else {
+           const data=await response.json()
+            console.log(data)
+        window.location.replace('/api/getimages')
+>>>>>>> 7ca59076fa81445c45e56ea647f963cc056dcf6b
          
     //       }
     } catch (error) {
