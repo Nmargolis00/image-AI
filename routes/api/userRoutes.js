@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
 //Post route for login
 router.post('/login', async (req, res) => {
     try {
-        console.log(req.body.email, req.body.password)
+       
         const userLogin = await User.findOne({
             where: {
                 email: req.body.email,
@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
         // }
       
         const check = await userLogin.checkPassword(req.body.password)
-        console.log(check);
+        
         if(!check){
             res.status(400).json({message: 'Incorrect password, please try again. If you do not have an account, please create one'});
             return;

@@ -48,13 +48,18 @@ router.post("/getimages", async (req, res) => {
       prompt: req.body.prompt,
       n:1,
       size: req.body.size,
+      // response_format: 'b64_json',
     });
-    console.log(response)
-    const images = response.data.data
-  res.render("images",{images})
+    const image = response.data.data[0].url
+    console.log(image)
   
-    //res.status(200).json(response.data.data);
+    
+      res.status(200).json({ photo: image }); 
+   
+    
+   
   } catch (error) {
+    console.error(error)
     res.status(500).json(error);
   }
 });

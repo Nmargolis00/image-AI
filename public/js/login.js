@@ -14,11 +14,11 @@ const loginFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        console.log("fuck you")
+        
         // If successful, redirect the browser to the profile page
         document.location.replace('/home');
       } else {
-       console.log("whatever")
+     
       }
     }
   };
