@@ -41,7 +41,8 @@ cloudinary.config({
 
 // at /api/images/getimages
 router.post("/getimages", async (req, res) => {
-  
+ 
+  console.log(req.body)
   try {
     const response = await openai.createImage({
       prompt: req.body.prompt,
