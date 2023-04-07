@@ -11,6 +11,7 @@ const configuration = new Configuration({
   apiKey:process.env.OPEN_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
+const withAuth = require('../../utils/auth');
 
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -56,6 +57,46 @@ router.post("/getimages", async (req, res) => {
     //res.status(200).json(response.data.data);
   } catch (error) {
     res.status(500).json(error);
+  }
+});
+
+//get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
+
+router.get('/getimages', async (req, res) => {
+  try {
+      const userImages = await Image.findAll({
+          where: {
+              user_id: req.session.user_id
+          },
+      })
+      const storedImages = userImages.map((image) => {
+          image.get({plain: true})
+          res.render('/images', storedImages)
+  })
+  } catch (error) {
+      res.status(400).json(error);
+      // res.redirect('login');
+  }
+
+});
+
+//delete saved photos
+router.delete('/getimage/:id', withAuth, async (req, res) => {
+  try {
+      const delImages = await Image.destroy({
+          where: {
+              id: req.params.id,
+              user_id: req.session.user_id,
+          },
+      });
+      if(!delImages) {
+          res.status(400).json({message: 'No image found'});
+          return;
+      }
+      res.status(200).json(delImages);
+  } catch (error) {
+      res.status(400).json(error);
+      res.redirect('login');
   }
 });
 

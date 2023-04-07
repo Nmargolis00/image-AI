@@ -39,20 +39,22 @@ router.post('/login', async (req, res) => {
             }
         })
         if(!userLogin){
-            res.status(400).json({message: 'No user found, please create an account'});
-            return;
+          return res.status(400).json({message: 'No user found, please create an account'});
+           
         }
+      
         const checkPassword = userLogin.checkPassword(req.body.password)
+        //console.log(checkPassword);
         if(!checkPassword){
             res.status(400).json({message: 'Incorrect password, please try again. If you do not have an account please create one'});
             return;
-        } 
-        req.session.save(() => {
+        } else
+   {     req.session.save(() => {
             req.session.user_id = userLogin.id
             req.session.email = userLogin.email;
             req.session.logged_in = true;
             res.json({user: userLogin, message: 'Welcome in!'})
-        })
+        })}
     } catch (error) {
         res.status(400).json(error);
     }
@@ -75,44 +77,6 @@ router.get('/login', async (req, res) =>{
     res.render('main', {loggedIn: req.session.loggedIn})
 });
 
-//get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
 
-router.get('/images', async (req, res) => {
-    try {
-        const userImages = await Image.findAll({
-            where: {
-                user_id: req.session.user_id
-            },
-        })
-        const storedImages = userImages.map((image) => {
-            image.get({plain: true})
-            res.render('/images', storedImages)
-    })
-    } catch (error) {
-        res.status(400).json(error);
-        // res.redirect('login');
-    }
-  
-})
-
-//delete saved photos
-router.delete('/image/:id', withAuth, async (req, res) => {
-    try {
-        const delImages = await Image.destroy({
-            where: {
-                id: req.params.id,
-                user_id: req.session.user_id,
-            },
-        });
-        if(!delImages) {
-            res.status(400).json({message: 'No image found'});
-            return;
-        }
-        res.status(200).json(delImages);
-    } catch (error) {
-        res.status(400).json(error);
-        res.redirect('login');
-    }
-})
 
 module.exports=router
