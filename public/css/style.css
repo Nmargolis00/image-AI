@@ -1,6 +1,6 @@
-/* body {
+body {
     background-color: antiquewhite;
-} */
+}
 
 .gradient-custom-2 {
     /* fallback for old browsers */
@@ -24,3 +24,14 @@
     border-bottom-right-radius: .3rem;
     }
     }
+
+    .btn-chg {
+        text-decoration: none;
+        border: 2px solid rgb(209, 17, 17);
+        padding: 4;
+        background-color: rgb(0, 154, 77);
+        color: white;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+    

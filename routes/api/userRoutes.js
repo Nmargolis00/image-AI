@@ -33,20 +33,21 @@ router.post('/', async (req, res) => {
 //Post route for login
 router.post('/login', async (req, res) => {
     try {
+       
         const userLogin = await User.findOne({
             where: {
                 email: req.body.email,
             }
         })
-        if(!userLogin){
-          return res.status(400).json({message: 'No user found, please create an account'});
+        // if(!userLogin){
+        //   return res.status(400).json({message: 'No user found, please create an account'});
            
-        }
+        // }
       
-        const checkPassword = userLogin.checkPassword(req.body.password)
-        //console.log(checkPassword);
-        if(!checkPassword){
-            res.status(400).json({message: 'Incorrect password, please try again. If you do not have an account please create one'});
+        const check = await userLogin.checkPassword(req.body.password)
+        
+        if(!check){
+            res.status(400).json({message: 'Incorrect password, please try again. If you do not have an account, please create one'});
             return;
         } else
    {     req.session.save(() => {
@@ -56,7 +57,8 @@ router.post('/login', async (req, res) => {
             res.json({user: userLogin, message: 'Welcome in!'})
         })}
     } catch (error) {
-        res.status(400).json(error);
+        console.error(error)
+        res.status(500).json(error);
     }
 });
 
