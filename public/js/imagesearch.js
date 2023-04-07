@@ -1,4 +1,4 @@
-import axios from "axios";
+
 const imageSearch = async (event) => {
   event.preventDefault();
   // prompt: "cat",
