@@ -39,21 +39,22 @@ router.post('/login', async (req, res) => {
             }
         })
         if(!userLogin){
-            res.status(400).json({message: 'No user found, please create an account'});
-            return;
+          return res.status(400).json({message: 'No user found, please create an account'});
+           
         }
+      
         const checkPassword = userLogin.checkPassword(req.body.password)
-        console.log(checkPassword);
+        //console.log(checkPassword);
         if(!checkPassword){
             res.status(400).json({message: 'Incorrect password, please try again. If you do not have an account please create one'});
             return;
-        } 
-        req.session.save(() => {
+        } else
+   {     req.session.save(() => {
             req.session.user_id = userLogin.id
             req.session.email = userLogin.email;
             req.session.logged_in = true;
             res.json({user: userLogin, message: 'Welcome in!'})
-        })
+        })}
     } catch (error) {
         res.status(400).json(error);
     }
