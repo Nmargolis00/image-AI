@@ -54,6 +54,7 @@ router.post('/login', async (req, res) => {
             req.session.user_id = userLogin.id
             req.session.email = userLogin.email;
             req.session.logged_in = true;
+            console.log(req.session)
             res.json({user: userLogin, message: 'Welcome in!'})
         })}
     } catch (error) {
@@ -64,19 +65,22 @@ router.post('/login', async (req, res) => {
 
 //Log Out
 
-router.post('/logout', async (req, res) => {
-    if(req.session.loggedIn) {
-        req.session.destroy(() => {
-            res.status(204).end();
-        });
-    }else{
-        res.status(404).end();
+
+router.post('/logout', (req, res) => {
+    console.log("logout",req.session)
+    if (req.session.logged_in) {
+      req.session.destroy(() => {
+        console.log(req.session)
+        res.status(204).end();
+      });
+    } else {
+      res.status(404).end();
     }
-});
+  });
 
 //get main login page
 router.get('/login', async (req, res) =>{
-    res.render('main', {loggedIn: req.session.loggedIn})
+    res.render('login', {loggedIn: req.session.loggedIn})
 });
 
 

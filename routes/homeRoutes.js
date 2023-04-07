@@ -4,10 +4,14 @@ const withAuth = require('../utils/auth');
 
 
 router.get('/',(req,res)=>{
-    res.render('login')
+    if(!req.session.logged_in){
+    res.render('login',{logged_in:req.session.logged_in})
+    }else{
+    res.render('homepage',{logged_in:req.session.logged_in})
+    }
 })
 router.get('/images',(req,res)=>{
-    res.render('homepage')
+    res.render('homepage',{logged_in:req.session.logged_in})
 })
 
 router.get('/home',(req,res)=>{
