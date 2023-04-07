@@ -11,6 +11,7 @@ const configuration = new Configuration({
   apiKey:process.env.OPEN_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
+const withAuth = require('../../utils/auth');
 
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
