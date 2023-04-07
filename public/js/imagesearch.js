@@ -1,8 +1,6 @@
-
-import axios  from 'axios';
+import axios from "axios";
 const imageSearch = async (event) => {
-
-    event.preventDefault();
+  event.preventDefault();
   // prompt: "cat",
   // n: 1,
   // size: "1024x1024",
@@ -12,52 +10,34 @@ const imageSearch = async (event) => {
 
   //  let myboj={prompt: serachTerm, n:NumberOfPics,size:picSize }
   // console.log(myboj)
-//console.log({prompt, n,size })
-  if (prompt  && size) {
-    const response =  axios({
-        method: 'post',
-        url: '/login',
-        data: {
-            prompt:prompt,
-            size:size
-        }
-      });
-   
+  //console.log({prompt, n,size })
+  if (prompt && size) {
+    const response = axios({
+      method: "post",
+      url: "/login",
+      data: {
+        prompt: prompt,
+        size: size,
+      },
+    });
+
     try {
-<<<<<<< HEAD
-        const response = await fetch("/api/image/getimages", {
-=======
-        const response = await fetch("api/image/getimages", {
->>>>>>> 7ca59076fa81445c45e56ea647f963cc056dcf6b
-            method: "POST",
-            body: JSON.stringify({prompt,size}),
-            headers: { "Content-Type": "application/json" },
-          });
-<<<<<<< HEAD
-     
-    //       if (response.ok) {
-        const data= response.json()
-       console.log(data)
-    //       } 
-        //   else {
-    //       
-    //         console.log(data)
-    //    // window.location.replace('/api/getimages')
-=======
-      console.log(response)
-          if (!response.ok) {
-           throw new Error('NO IMAGE')
-          } else {
-           const data=await response.json()
-            console.log(data)
-        window.location.replace('/api/getimages')
->>>>>>> 7ca59076fa81445c45e56ea647f963cc056dcf6b
-         
-    //       }
+      const response = await fetch("api/image/getimages", {
+        method: "POST",
+        body: JSON.stringify({ prompt, size }),
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log(response);
+      if (!response.ok) {
+        throw new Error("NO IMAGE");
+      } else {
+        const data = await response.json();
+        console.log(data);
+        window.location.replace("/api/getimages");
+      }
     } catch (error) {
-       console.log(error)
+      console.log(error);
     }
-    
   }
 };
 
