@@ -6,6 +6,9 @@ const withAuth = require('../utils/auth');
 router.get('/',(req,res)=>{
     res.render('login')
 })
+router.get('/images',(req,res)=>{
+    res.render('homepage')
+})
 
 router.get('/home',(req,res)=>{
     res.render('homepage')

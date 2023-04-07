@@ -42,7 +42,8 @@ cloudinary.config({
 
 // at /api/images/getimages
 router.post("/getimages", async (req, res) => {
-  
+ 
+ 
   try {
     const response = await openai.createImage({
       prompt: req.body.prompt,
@@ -66,23 +67,23 @@ router.post("/getimages", async (req, res) => {
 
 //get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
 
-router.get('/getimages', async (req, res) => {
-  try {
-      const userImages = await Image.findAll({
-          where: {
-              user_id: req.session.user_id
-          },
-      })
-      const storedImages = userImages.map((image) => {
-          image.get({plain: true})
-          res.render('/images', storedImages)
-  })
-  } catch (error) {
-      res.status(400).json(error);
-      // res.redirect('login');
-  }
+// router.get('/getimages', async (req, res) => {
+//   try {
+//       const userImages = await Image.findAll({
+//           where: {
+//               user_id: req.session.user_id
+//           },
+//       })
+//       const storedImages = userImages.map((image) => {
+//           image.get({plain: true})
+//           res.render('/images', storedImages)
+//   })
+//   } catch (error) {
+//       res.status(400).json(error);
+//       // res.redirect('login');
+//   }
 
-});
+// });
 
 //delete saved photos
 router.delete('/getimage/:id', withAuth, async (req, res) => {

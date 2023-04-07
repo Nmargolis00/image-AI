@@ -21,6 +21,7 @@ const loginFormHandler = async (event) => {
      
       }
     }
+  
   };
   
   //This should first take you to a new page and then gather the information below. Once you sign up, you are redirected back to main page where you can log in
@@ -48,7 +49,11 @@ const loginFormHandler = async (event) => {
   // };
   
   document
+<<<<<<< HEAD
+    .querySelector('#login-form')
+=======
     .querySelector('.login-form')
+>>>>>>> d2904c47f7fa19a40f602b392c1db1b5d99ff25c
     .addEventListener('click', loginFormHandler);
   
   // document
