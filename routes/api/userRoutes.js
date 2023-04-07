@@ -43,6 +43,7 @@ router.post('/login', async (req, res) => {
             return;
         }
         const checkPassword = userLogin.checkPassword(req.body.password)
+        console.log(checkPassword);
         if(!checkPassword){
             res.status(400).json({message: 'Incorrect password, please try again. If you do not have an account please create one'});
             return;
@@ -52,7 +53,7 @@ router.post('/login', async (req, res) => {
             req.session.email = userLogin.email;
             req.session.logged_in = true;
             res.json({user: userLogin, message: 'Welcome in!'})
-        }, res.redirect('/home')) 
+        })
     } catch (error) {
         res.status(400).json(error);
     }
