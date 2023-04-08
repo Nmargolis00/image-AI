@@ -3,21 +3,21 @@
 //https://platform.openai.com/docs/api-reference/introduction
 // installed nodemon
 const router = require("express").Router();
-require('dotenv').config();
-const cloudinary = require('cloudinary').v2
-const { Configuration, OpenAIApi } = require('openai');
+require("dotenv").config();
+const cloudinary = require("cloudinary").v2;
+const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-  organization:process.env.ORG_KEY,
-  apiKey:process.env.OPEN_API_KEY,
+  organization: process.env.ORG_KEY,
+  apiKey: process.env.OPEN_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
-const withAuth = require('../../utils/auth');
+const withAuth = require("../../utils/auth");
 
 cloudinary.config({
-	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET,
-})
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 //---------- at /api/images ----------
 
@@ -25,9 +25,9 @@ cloudinary.config({
 
 //   try {
 //     const { name, prompt, photo } = req.body;
-   
+
 //     const photoUrl = await cloudinary.uploader.upload(photo);
-  
+
 //     const newPost = await Post.create({
 //       name,
 //       prompt,
@@ -42,25 +42,19 @@ cloudinary.config({
 
 // at /api/images/getimages
 router.post("/getimages", async (req, res) => {
- 
- 
   try {
     const response = await openai.createImage({
       prompt: req.body.prompt,
-      n:1,
+      n: 1,
       size: req.body.size,
       // response_format: 'b64_json',
     });
-    const image = response.data.data[0].url
-    console.log(image)
-  
-    
-      res.status(200).json({ photo: image }); 
-   
-    
-   
+
+    const image = response.data.data[0].url;
+
+    res.status(200).json({ photo: image });
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(500).json(error);
   }
 });
@@ -86,23 +80,23 @@ router.post("/getimages", async (req, res) => {
 // });
 
 //delete saved photos
-router.delete('/getimage/:id', withAuth, async (req, res) => {
+router.delete("/getimage/:id", withAuth, async (req, res) => {
   try {
-      const delImages = await Image.destroy({
-          where: {
-              id: req.params.id,
-              user_id: req.session.user_id,
-          },
-      });
-      if(!delImages) {
-          res.status(400).json({message: 'No image found'});
-          return;
-      }
-      res.status(200).json(delImages);
+    const delImages = await Image.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+    if (!delImages) {
+      res.status(400).json({ message: "No image found" });
+      return;
+    }
+    res.status(200).json(delImages);
   } catch (error) {
-      res.status(400).json(error);
-      res.redirect('login');
+    res.status(400).json(error);
+    res.redirect("login");
   }
 });
 
-module.exports=router
+module.exports = router;
