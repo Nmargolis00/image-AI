@@ -44,6 +44,10 @@ router.get("/show-image", (req, res) => {
   res.render("show-image", { photo: req.session.photo, logged_in: req.session.logged_in });
 });
 
+router.get("/profile", (req, res) => {
+  res.render("profile", { logged_in: req.session.logged_in });
+});
+
 //router.get('/signup', (req, res) => {
 //res.render('signup')
 //})
