@@ -1,11 +1,16 @@
 const spinner = document.getElementById("spinner");
+const errDisplay=document.getElementById('errDisplay')
 const imageSearch = async () => {
   const prompt = document.querySelector("#term").value.trim();
 
   const size = document.querySelector("#pic-size").value.trim();
 
   if (!prompt || !size) {
-    alert("size and text required");
+    //alert("size and text required");
+   errDisplay.innerHTML="text and size required"
+   setInterval(()=>{
+    errDisplay.style.visibility='hidden'
+   },3000)
     return;
   }
   generateImageRequest(prompt, size);
@@ -24,15 +29,28 @@ async function generateImageRequest(prompt, size) {
     });
 
     if (!response.ok) {
-      throw new Error("That image could not be generated");
+      errDisplay.innerHTML="image not found please try another serach term"
+    errDisplay.style.visibility='visibile'
+    document.getElementById("spinner").style.display = "none";
+      
+      setInterval(()=>{
+        errDisplay.style.visibility='hidden'
+       },3000)
     } else {
+      
       const imageUrl = await response.json();
       document.querySelector("#image").src = imageUrl.photo;
       document.getElementById("spinner").style.display = "none";
+      rerender(imageUrl.photo)
     }
   } catch (error) {
     console.log(console.log(error));
   }
+}
+const rerender=(url)=>{
+  window.addEventListener("load", () => {
+    document.querySelector("#image").src = url;
+  });
 }
 window.addEventListener("load", () => {
   document.getElementById("spinner").style.display = "none";

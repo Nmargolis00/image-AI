@@ -11,9 +11,17 @@ Image.init(
       allowNull: false,
     },
     image_url: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.TEXT('long'),
       allowNull: false,
     },
+    user_id:{
+      type: DataTypes.INTEGER,
+      references: {
+        model:"user",
+        key: "id"
+      },
+
+    }
   },
   {
     sequelize,

@@ -1,6 +1,4 @@
-body {
-  background-color: antiquewhite;
-}
+
 
 .gradient-custom-2 {
   /* fallback for old browsers */
@@ -33,12 +31,15 @@ body {
 
 .btn-chg {
   text-decoration: none;
-  border: 2px solid rgb(209, 17, 17);
-  padding: 4;
+  border: 2px solid rgb(154, 119, 119);
+  
   background-color: rgb(0, 154, 77);
   color: white;
   border-radius: 5px;
-  margin-top: 10px;
+
+}
+.btn-chg:hover{
+  background-color: #ee7724;
 }
 
 .image-style {
@@ -56,7 +57,7 @@ body {
 }
 
 .full-page {
-    background-color: #eee;
+    background-color: white;
     height: 100vh;
 }
 
@@ -79,11 +80,13 @@ body {
 }
 
 .head-btn {
-  padding: 8px;
+  align-items: center;
+  padding: 5px 8px 8px 8px;
   background-color: #d8363a;
   color: white;
   border-radius: 6px;
   margin-right: 20px;
+  margin-top: 50px;
   
 }
 
@@ -92,9 +95,7 @@ body {
 .head {
 display: flex;
 justify-content: space-between;
-align-items: start;
-margin-top:20px;
-height: max-content;
+background-color: #eee;
 
 }
 
@@ -108,7 +109,7 @@ height: max-content;
 .comm-text {
   max-width: 35%;
   margin-left: 50px;
-  background-color: white;
+  background-color: #eee;
   border-radius: 15px;
   padding: 10px;
   margin-top: 50px;
@@ -126,4 +127,8 @@ flex-wrap: wrap;
   border: 3px solid black;
   padding: 5px;
   max-width: 256px;
+}
+
+.move {
+  margin-top: 20px;
 }

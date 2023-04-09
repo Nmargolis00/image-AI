@@ -16,9 +16,10 @@
   <body>
     <header>
       <div class = "head">
-       <a href = "/"> 
+      
        <img class="logo" src="/images/GarbanzoAI-logo.png" alt="logo" /> </a>
-        {{! log in details here }}
+      
+        <div class="move">
         {{#if logged_in}}
           <a href="/profile">Profile</a>
           
@@ -28,6 +29,7 @@
             <a class="head-btn" href="/login">Login</a>
           </div>
         {{/if}}
+        </div>
       </div>
     </header>
     <main>

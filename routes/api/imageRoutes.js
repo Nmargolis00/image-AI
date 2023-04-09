@@ -1,7 +1,4 @@
-//Kumenger for image routes and
-//we have to install a package to use open api (npm install openai)
-//https://platform.openai.com/docs/api-reference/introduction
-// installed nodemon
+const { Image } = require("../../models");
 const router = require("express").Router();
 const { Community } = require("../../models");
 require("dotenv").config();
@@ -21,13 +18,11 @@ cloudinary.config({
 });
 
 router.post("/getimages", async (req, res) => {
-
   try {
     const response = await openai.createImage({
       prompt: req.body.prompt,
       n: 1,
       size: req.body.size,
-  
     });
 
     const image = response.data.data[0].url;
@@ -35,7 +30,6 @@ router.post("/getimages", async (req, res) => {
       req.session.current_image = image;
       res.status(200).json({ photo: image });
     });
- 
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
@@ -44,17 +38,21 @@ router.post("/getimages", async (req, res) => {
 //save image to db
 router.post("/saveimage", async (req, res) => {
   try {
-    //console.log("saveimage", req.session.current_image)
-   res.send(`${req.session.current_image}`)
-  
+    const saveImage = await Image.create({
+      image_url: req.session.current_image,
+      user_id: req.session.user_id,
+    });
+    res.status(200).json(saveImage);
   } catch (error) {
     console.log(error);
   }
 });
 router.post("/community", async (req, res) => {
   try {
+    const photoUrl = await cloudinary.uploader.upload(req.body.image_src);
+
     const response = await Community.create({
-      picture: req.body.image_src,
+      picture: photoUrl.url,
     });
     res.status(200).json(response);
   } catch (error) {
@@ -63,23 +61,7 @@ router.post("/community", async (req, res) => {
 });
 //get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
 
-// router.get('/getimages', async (req, res) => {
-//   try {
-//       const userImages = await Image.findAll({
-//           where: {
-//               user_id: req.session.user_id
-//           },
-//       })
-//       const storedImages = userImages.map((image) => {
-//           image.get({plain: true})
-//           res.render('/images', storedImages)
-//   })
-//   } catch (error) {
-//       res.status(400).json(error);
-//       // res.redirect('login');
-//   }
 
-// });
 
 //delete saved photos
 router.delete("/getimage/:id", withAuth, async (req, res) => {
