@@ -12,10 +12,17 @@ const withAuth = require("../utils/auth");
 // })
 router.get("/", async (req, res) => {
   const getPhotos = await Community.findAll();
+  if (getPhotos) {
+
   
   const mapPhotos = getPhotos.map((one) => one.get({ plain: true }));
+  const orderPhotos = mapPhotos.reverse()
   
-  res.render("community", {pic: mapPhotos});
+  res.render("community", {pic: orderPhotos});
+}
+else {
+  res.render("community")
+}
 });
 router.get("/login", (req, res) => {
   res.render("login");

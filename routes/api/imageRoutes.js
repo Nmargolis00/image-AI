@@ -61,9 +61,12 @@ router.post("/getimages", async (req, res) => {
 });
 
 router.post("/community", async (req, res) => {
+  
   try {
+    const photoUrl = await cloudinary.uploader.upload(req.body.image_src);
+    
     const response = await Community.create({
-      picture: req.body.image_src
+      picture: photoUrl.url
     })
     res.status(200).json(response)
   } catch (error) {
