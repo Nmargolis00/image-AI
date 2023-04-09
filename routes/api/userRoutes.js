@@ -39,10 +39,7 @@ router.post('/login', async (req, res) => {
                 email: req.body.email,
             }
         })
-        // if(!userLogin){
-        //   return res.status(400).json({message: 'No user found, please create an account'});
-           
-        // }
+     
       
         const check = await userLogin.checkPassword(req.body.password)
         
@@ -54,7 +51,7 @@ router.post('/login', async (req, res) => {
             req.session.user_id = userLogin.id
             req.session.email = userLogin.email;
             req.session.logged_in = true;
-            console.log(req.session)
+          
             res.json({user: userLogin, message: 'Welcome in!'})
         })}
     } catch (error) {
@@ -64,6 +61,7 @@ router.post('/login', async (req, res) => {
 });
 
 //Log Out
+
 
 
 router.post('/logout', (req, res) => {

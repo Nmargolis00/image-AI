@@ -92,7 +92,9 @@ body {
 .head {
 display: flex;
 justify-content: space-between;
+align-items: start;
 margin-top:20px;
+height: max-content;
 
 }
 

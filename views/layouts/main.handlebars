@@ -16,12 +16,13 @@
   <body>
     <header>
       <div class = "head">
-       <a href = "/"> <img class="logo" src="/images/GarbanzoAI-logo.png" alt="logo" /> </a>
+       <a href = "/"> 
+       <img class="logo" src="/images/GarbanzoAI-logo.png" alt="logo" /> </a>
         {{! log in details here }}
         {{#if logged_in}}
           <a href="/profile">Profile</a>
-          |
-          <button class="no-button" id="logout">Logout</button>
+          
+          <button class="head-btn" id="logout">Logout</button>
         {{else}}
           <div>
             <a class="head-btn" href="/login">Login</a>

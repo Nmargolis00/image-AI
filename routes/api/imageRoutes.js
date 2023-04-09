@@ -3,7 +3,7 @@
 //https://platform.openai.com/docs/api-reference/introduction
 // installed nodemon
 const router = require("express").Router();
-const { Community } = require('../../models');
+const { Community } = require("../../models");
 require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
 const { Configuration, OpenAIApi } = require("openai");
@@ -20,58 +20,47 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-//---------- at /api/image ----------
-
-// router.post('/', async (req, res) => {
-
-//   try {
-//     const { name, prompt, photo } = req.body;
-
-//     const photoUrl = await cloudinary.uploader.upload(photo);
-
-//     const newPost = await Post.create({
-//       name,
-//       prompt,
-//       photo: photoUrl.url,
-//     });
-//     res.status(200).json({ success: true, data: newPost });
-//   } catch (err) {
-
-//     res.status(500).json({ success: false, message: err });
-//   }
-// });
-
-// at /api/image/getimages
 router.post("/getimages", async (req, res) => {
+
   try {
     const response = await openai.createImage({
       prompt: req.body.prompt,
       n: 1,
       size: req.body.size,
-      // response_format: 'b64_json',
+  
     });
 
     const image = response.data.data[0].url;
-
-    res.status(200).json({ photo: image });
+    req.session.save(() => {
+      req.session.current_image = image;
+      res.status(200).json({ photo: image });
+    });
+ 
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
-
+//save image to db
+router.post("/saveimage", async (req, res) => {
+  try {
+    //console.log("saveimage", req.session.current_image)
+   res.send(`${req.session.current_image}`)
+  
+  } catch (error) {
+    console.log(error);
+  }
+});
 router.post("/community", async (req, res) => {
   try {
     const response = await Community.create({
-      picture: req.body.image_src
-    })
-    res.status(200).json(response)
+      picture: req.body.image_src,
+    });
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json(error);
-    
   }
-}
-)
+});
 //get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
 
 // router.get('/getimages', async (req, res) => {

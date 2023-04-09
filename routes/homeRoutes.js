@@ -18,15 +18,13 @@ router.get("/", async (req, res) => {
   res.render("community", {pic: mapPhotos});
 });
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login",{current_image:req.session.current_image});
 });
 
-router.get("/images", (req, res) => {
-  res.render("homepage", { logged_in: req.session.logged_in });
-});
+
 
 router.get("/home", (req, res) => {
-  res.render("homepage");
+  res.render("homepage",{logged_in: req.session.logged_in ,current_image:req.session.current_image});
 });
 
 router.get("/show-image", (req, res) => {
