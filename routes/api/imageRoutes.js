@@ -3,6 +3,7 @@
 //https://platform.openai.com/docs/api-reference/introduction
 // installed nodemon
 const router = require("express").Router();
+const { Community } = require('../../models');
 require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
 const { Configuration, OpenAIApi } = require("openai");
@@ -19,7 +20,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-//---------- at /api/images ----------
+//---------- at /api/image ----------
 
 // router.post('/', async (req, res) => {
 
@@ -40,7 +41,7 @@ cloudinary.config({
 //   }
 // });
 
-// at /api/images/getimages
+// at /api/image/getimages
 router.post("/getimages", async (req, res) => {
   try {
     const response = await openai.createImage({
@@ -59,6 +60,18 @@ router.post("/getimages", async (req, res) => {
   }
 });
 
+router.post("/community", async (req, res) => {
+  try {
+    const response = await Community.create({
+      picture: req.body.image_src
+    })
+    res.status(200).json(response)
+  } catch (error) {
+    res.status(500).json(error);
+    
+  }
+}
+)
 //get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
 
 // router.get('/getimages', async (req, res) => {
