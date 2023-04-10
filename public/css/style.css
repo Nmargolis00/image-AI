@@ -155,3 +155,8 @@ flex-wrap: wrap;
   border-radius: 5px;
   color: white;
 }
+
+.comm {
+  font-size: 21px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
