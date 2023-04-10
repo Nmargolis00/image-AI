@@ -18,16 +18,13 @@ User.init(
             autoIncrement: true,
             allowNull: false,
         },
-        user_name:{
-            type: DataTypes.STRING(100),
-            allowNull:false
-        },
+        
         email:{
             type: DataTypes.STRING,
             allowNull:false,
             unique: true,
             validator:{
-                isEmail: { args: true, msg: 'email format is not correct' },
+                isEmail: { args: true, msg: 'Email format is not correct' },
             }
         },
         password:{
