@@ -1,15 +1,9 @@
 const router = require("express").Router();
 const { Community } = require("../models");
-
+const { Image } = require("../models/index");
 const withAuth = require("../utils/auth");
 
-// router.get('/',(req,res)=>{
-//     if(!req.session.logged_in){
-//     res.render('login',{logged_in:req.session.logged_in})
-//     }else{
-//     res.render('homepage',{logged_in:req.session.logged_in})
-//     }
-// })
+
 router.get("/", async (req, res) => {
   console.log(req.session)
   const getPhotos = await Community.findAll();
@@ -43,8 +37,19 @@ router.get("/show-image", (req, res) => {
   res.render("show-image", { photo: req.session.photo, logged_in: req.session.logged_in });
 });
 
-router.get("/profile", (req, res) => {
-  res.render("profile", { logged_in: req.session.logged_in });
+router.get("/dasboard", async(req, res) => {
+  try {
+    const response = await Image.findAll({
+      where: { user_id: req.session.user_id },
+    });
+    const plainData = response.map((img) => img.get({ plain: true }));
+    console.log(plainData.length,plainData);
+    res.render("profile", {
+      plainData,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.get('/signup',(req,res)=>{

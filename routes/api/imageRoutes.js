@@ -18,7 +18,6 @@ cloudinary.config({
 });
 
 router.post("/getimages", async (req, res) => {
-  
   try {
     const response = await openai.createImage({
       prompt: req.body.prompt,
@@ -36,6 +35,7 @@ router.post("/getimages", async (req, res) => {
     res.status(500).json(error);
   }
 });
+;
 //save image to db
 router.post("/saveimage", async (req, res) => {
   try {
@@ -55,14 +55,13 @@ router.post("/community", async (req, res) => {
     const response = await Community.create({
       picture: photoUrl.url,
     });
+    console.log(response);
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 //get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
-
-
 
 //delete saved photos
 router.delete("/getimage/:id", withAuth, async (req, res) => {

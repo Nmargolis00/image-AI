@@ -1,1 +1,10 @@
 <p>This is the profile page.</p>
+<div class="">
+    {{#each plainData as |img|}}
+        <div class="">
+             <br>
+        <div class="">   <img class="" src={{img.image_url}} style="width: 10%;"/></div> <br>
+         <div class=""><button class="btn btn-danger" id="deleteImage">Delete Image</button></div>     
+        </div>
+    {{/each}}
+</div>
