@@ -1,6 +1,4 @@
-body {
-  background-color: antiquewhite;
-}
+
 
 .gradient-custom-2 {
   /* fallback for old browsers */
@@ -33,29 +31,31 @@ body {
 
 .btn-chg {
   text-decoration: none;
-  border: 2px solid rgb(209, 17, 17);
-  padding: 4;
+  border: 2px solid rgb(154, 119, 119);
+  
   background-color: rgb(0, 154, 77);
   color: white;
   border-radius: 5px;
-  margin-top: 10px;
+
+}
+.btn-chg:hover{
+  background-color: #ee7724;
 }
 
 .image-style {
-  border: 10px solid black;
-  width: 200px;
-  height: 200px;
-  margin-left: auto;
-  margin-right: auto;
+  /* border: 10px solid black; */
+  display: flex;
+  margin-left: 21%;
   margin-top: 50px;
 }
 
 #image {
   background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  
 }
 
 .full-page {
-    background-color: grey;
+    background-color: white;
     height: 100vh;
 }
 
@@ -71,4 +71,95 @@ body {
 
 .text-center {
     margin-top: 20px;
+}
+
+.logo {
+  max-width: 200px;
+}
+
+.head-btn {
+  align-items: center;
+  padding: 5px 8px 8px 8px;
+  background-color: #d8363a;
+  color: white;
+  border-radius: 6px;
+  margin-right: 20px;
+  margin-top: 50px;
+  
+}
+
+
+
+.head {
+display: flex;
+justify-content: space-between;
+background-color: #eee;
+
+}
+
+.comm-title {
+  text-align: center;
+  font-size: 35px;
+  font-weight: bolder;
+  
+}
+
+.comm-text {
+  max-width: 35%;
+  margin-left: 50px;
+  background-color: #eee;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 50px;
+}
+
+.comm-img {
+display: flex;
+margin-left: 15px;
+flex-wrap: wrap;
+
+}
+
+.comm-pic {
+  margin: 8px;
+  border: 3px solid black;
+  padding: 5px;
+  max-width: 256px;
+}
+
+/* .move {
+  margin-top: 20px;
+} */
+
+.input-col {
+  margin-left: 50px;
+  margin-top: 10%;
+}
+
+#term {
+  margin-bottom: 10px;
+  width: 232px;
+}
+
+.profile {
+  padding: 6px 8px 9px 8px;
+  border: 1px solid black;
+  box-shadow: 1px 1px black;
+}
+
+.login {
+  padding: 2px 8px 9px 8px;
+  border: 1px solid black;
+  box-shadow: 1px 1px black;
+  margin-right: 20px;
+  align-self:flex-end;
+
+  background-color: #d8363a;
+  border-radius: 5px;
+  color: white;
+}
+
+.comm {
+  font-size: 21px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }

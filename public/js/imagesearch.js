@@ -1,69 +1,77 @@
+const spinner = document.getElementById("spinner");
+const errDisplay=document.getElementById('errDisplay')
 const imageSearch = async () => {
   const prompt = document.querySelector("#term").value.trim();
-
+const hideImage = document.getElementById("image")
   const size = document.querySelector("#pic-size").value.trim();
+  const dynamic = document.querySelector("#dynamic-box");
+
+   if (size == "1024x1024") {
+        dynamic.setAttribute("style", "margin-left: 5%;");
+        document.querySelector("#image").style.display = "none";
+        
+      }
+      else if (size == "512x512") {
+          dynamic.setAttribute("style", "margin-left: 13%;");
+          document.querySelector("#image").style.display = "none";
+      }
+      else {
+        dynamic.setAttribute("style", "margin-left: 22%;");
+        document.querySelector("#image").style.display = "none";
+      }
 
   if (!prompt || !size) {
-    alert("size and text required");
+    //alert("size and text required");
+   errDisplay.innerHTML="text and size required"
+   setInterval(()=>{
+    errDisplay.style.visibility='hidden'
+   },3000)
     return;
   }
   generateImageRequest(prompt, size);
 };
-// if (prompt && size) {
-//   console.log({ prompt, size });
-//   try {
-//     const response = await fetch("/api/image/getimages", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         prompt,
-//         size,
-//       }),
-//     });
 
-//     if (!response.ok) {
-//       throw new Error("NO IMAGE");
-//     } else {
-//       const data = await response.json();
-//       console.log(data);
-//       //window.location.replace("/api/getimages");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-//};
 async function generateImageRequest(prompt, size) {
- let parsedData=JSON.stringify({prompt,size})
+  let parsedData = JSON.stringify({ prompt, size });
   try {
+    document.getElementById("spinner").style.display = "block";
     const response = await fetch("/api/image/getimages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body:parsedData
+      body: parsedData,
     });
 
     if (!response.ok) {
-      throw new Error("That image could not be generated");
+      errDisplay.innerHTML="image not found please try another serach term"
+    errDisplay.style.visibility='visibile'
+    document.getElementById("spinner").style.display = "none";
+      
+      setInterval(()=>{
+        errDisplay.style.visibility='hidden'
+       },3000)
+    } else {
+      
+      const imageUrl = await response.json();
+      
+      document.querySelector("#image").src = await imageUrl.photo;
+      document.querySelector("#image").style.display = "block";
+      document.getElementById("spinner").style.display = "none";
+      rerender(imageUrl.photo)
     }
-  const imageUrl=await response.json()
-  console.log('-----53----')
-  console.log(imageUrl)
-  console.log('-----55----')
-  console.log(imageUrl.photo)
-
-  
- 
-
    
-
-    document.querySelector("#image").src = imageUrl.photo;
   } catch (error) {
     console.log(console.log(error));
   }
+  
 }
-
+const rerender=(url)=>{
+  window.addEventListener("load", () => {
+    document.querySelector("#image").src = url;
+  });
+}
+window.addEventListener("load", () => {
+  document.getElementById("spinner").style.display = "none";
+});
 document.getElementById("searchImg").addEventListener("click", imageSearch);

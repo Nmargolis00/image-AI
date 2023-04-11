@@ -14,11 +14,11 @@ const loginFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        
+       
         // If successful, redirect the browser to the profile page
-        document.location.replace('/home');
+        window.location.replace("/home");
       } else {
-     
+        alert("Please enter a valid email address and password.")
       }
     }
   
@@ -48,8 +48,7 @@ const loginFormHandler = async (event) => {
   //   }
   // };
   
-  document
-    .querySelector('.login-form')
+  document.querySelector('#login-form')
     .addEventListener('click', loginFormHandler);
   
   // document

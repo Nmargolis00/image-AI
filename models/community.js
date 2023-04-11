@@ -1,8 +1,8 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Image extends Model {}
-Image.init(
+class Community extends Model {}
+Community.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -10,25 +10,17 @@ Image.init(
       autoIncrement: true,
       allowNull: false,
     },
-    image_url: {
-      type: DataTypes.TEXT('long'),
+    picture: {
+      type: DataTypes.STRING(1000),
       allowNull: false,
     },
-    user_id:{
-      type: DataTypes.INTEGER,
-      references: {
-        model:"user",
-        key: "id"
-      },
-
-    }
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "image",
+    modelName: "community",
   }
 );
-module.exports=Image
+module.exports=Community

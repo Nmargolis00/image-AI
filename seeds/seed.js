@@ -11,7 +11,9 @@ const seedDatabase = async () => {
     individualHooks: true,
     returning: true,
   });
-  return users;
+
+  
+ process.exit(0)
 };
 
 seedDatabase();
