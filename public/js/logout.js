@@ -5,7 +5,7 @@ const logout = async () => {
     });
   
     if (response.ok) {
-      window.location.replace('/');
+      window.location.replace("/");
     } else {
       alert(response.statusText);
     }

@@ -10,8 +10,8 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-
-    <title>Image AI</title>
+<link rel="icon" href="/images/garbanzo-favicon.png" type="image">
+    <title>Garbanzo AI</title>
   </head>
   <body>
     <header>
@@ -21,12 +21,13 @@
       
         <div class="move">
         {{#if logged_in}}
-          <a href="/profile">Profile</a>
+          <a class="head-btn profile" href="/home">Render</a>
+          <a class="head-btn profile" href="/profile">Profile</a>
           
           <button class="head-btn" id="logout">Logout</button>
         {{else}}
           <div>
-            <a class="head-btn" href="/login">Login</a>
+            <a class="login" href="/login">Login</a>
           </div>
         {{/if}}
         </div>
@@ -39,7 +40,7 @@
 
     </main>
 
-    <footer></footer>
+    
 
     <!-- Render script for logged in users only -->
     {{#if logged_in}}

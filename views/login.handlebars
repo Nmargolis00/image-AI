@@ -52,7 +52,7 @@
   </div>
 </form> }}
 
-<section class="h-100 gradient-form" style="background-color: #eee;">
+<section class="h-100 gradient-form">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-10">
@@ -64,11 +64,11 @@
                 <div class="text-center">
                   {{!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                     style="width: 185px;" alt="logo"> --}}
-                  <h4 class="mt-1 mb-5 pb-1">IMAGE AI</h4>
+                  <h4 class="mt-1 mb-5 pb-1">GARBANZO AI</h4>
                 </div>
 
                 <form>
-                  <p>Please login to your account</p>
+                  <p>Please Login to Your Account</p>
 
                   <div class="form-outline mb-4">
                     <input type="email" id="email-login" class="form-control"
@@ -83,12 +83,12 @@
 
                   <div class="text-center pt-1 mb-5 pb-1">
                     <button class="login-form btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" id="login-form" type="submit" >Login</button>
-                    <a class="text-muted" href="#!">Forgot Password?</a>
+                    {{!-- <a class="text-muted" href="#!">Forgot Password?</a> --}}
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
-                    <p class="mb-0 me-2">Don't have an account?</p>
-                    <button  class="signup-form btn btn-outline-danger" id="btnSignUp">Create New</button>
+                    <a href="/signup" class="mb-0 me-2">Signup For New Account</a>
+                    
                   </div>
 
                 </form>
