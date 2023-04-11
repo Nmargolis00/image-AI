@@ -3,14 +3,8 @@
       
       "email": "Nate@hotmail.com",
       "password": "1234"
-<<<<<<< HEAD
-    },
-    {
-      "user_name": "kume",
-=======
     },{
       
->>>>>>> 695192516a3e534d7c7e6927a241c178b26d67d5
       "email": "kumeprog@gmail.com",
       "password": "1234"
     }
