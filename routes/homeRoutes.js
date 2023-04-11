@@ -11,6 +11,7 @@ const withAuth = require("../utils/auth");
 //     }
 // })
 router.get("/", async (req, res) => {
+  console.log(req.session)
   const getPhotos = await Community.findAll();
   if (getPhotos) {
 
@@ -28,9 +29,7 @@ router.get("/login", (req, res) => {
   res.render("login", {logged_in: req.session.logged_in});
 });
 
-router.get("/images", (req, res) => {
-  res.render("homepage", { logged_in: req.session.logged_in });
-});
+
 
 router.get("/signup", (req, res) => {
   res.render("signup", { logged_in: req.session.logged_in });
@@ -48,6 +47,9 @@ router.get("/profile", (req, res) => {
   res.render("profile", { logged_in: req.session.logged_in });
 });
 
+router.get('/signup',(req,res)=>{
+  res.render('signUp')
+})
 //router.get('/signup', (req, res) => {
 //res.render('signup')
 //})
