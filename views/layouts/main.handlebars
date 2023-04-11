@@ -17,12 +17,12 @@
     <header>
       <div class = "head">
       
-       <img class="logo" src="/images/GarbanzoAI-logo.png" alt="logo" /> </a>
+   <a href="/">   <img class="logo" src="/images/GarbanzoAI-logo.png" alt="logo"  /> </a>
       
         <div class="move">
         {{#if logged_in}}
-          <a class="head-btn profile" href="/home">Render</a>
-          <a class="head-btn profile" href="/profile">Profile</a>
+          <a class="head-btn profile" href="/home">New Image</a>
+          <a class="head-btn profile" id="profile" href="/dasboard">Dashboard</a>
           
           <button class="head-btn" id="logout">Logout</button>
         {{else}}
@@ -46,5 +46,6 @@
     {{#if logged_in}}
       <script src="/js/logout.js"></script>
     {{/if}}
+      <script src="/js/dashboard.js"></script>
   </body>
 </html>

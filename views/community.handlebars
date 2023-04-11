@@ -1,18 +1,18 @@
 <section>
-  <p class="comm-title">Welcome to GarbanzoAI</p>
-  <div class="comm-text">
-    <p class="comm">Generate your own images using the DALL-E image generator from OpenAI.
-      You can save your images to your own profile, or you can share them with
-      the community. If you share your images with the community, they will
-      display below for everyone to see.</p>
-  </div>
-  <p class="comm-title">Community Images</p>
-  <div class="comm-img">
-    {{#each pic}}
-      <div>
+    <p class="comm-title">Welcome to GarbanzoAI</p>
+    <div class="comm-text">
+        <p class="comm">Generate your own images using the DALL-E image generator from OpenAI.
+                  You can save your images to your own profile, or you can share them with
+                  the community. If you share your images with the community, they will
+                  display below for everyone to see.</p>
+    </div>
+    <p class="comm-title">Community Images</p>
+    <div class="comm-img">
+        {{#each pic}}
+            <div>
 
-        <img class="comm-pic" src={{picture}} />
-      </div>
-    {{/each}}
-  </div>
+                <img class="comm-pic" src={{picture}}/>
+            </div>
+        {{/each}}
+    </div>
 </section>

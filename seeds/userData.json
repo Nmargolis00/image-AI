@@ -1,11 +1,17 @@
-[
-    {
-      
-      "email": "Nate@hotmail.com",
-      "password": "1234"
-    },{
-      
-      "email": "kumeprog@gmail.com",
-      "password": "1234"
-    }
-]
+[{
+
+  "email": "Nate@hotmail.com",
+  "password": "1234"
+}, {
+
+  "email": "kumeprog@gmail.com",
+  "password": "1234"
+}, {
+
+  "email": "jancy@hotmail.com",
+  "password": "1234"
+}, {
+
+  "email": "jhone@gmail.com",
+  "password": "1234"
+}]

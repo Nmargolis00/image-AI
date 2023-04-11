@@ -2,7 +2,7 @@ const spinner = document.getElementById("spinner");
 const errDisplay=document.getElementById('errDisplay')
 const imageSearch = async () => {
   const prompt = document.querySelector("#term").value.trim();
-const hideImage = document.getElementById("image")
+
   const size = document.querySelector("#pic-size").value.trim();
   const dynamic = document.querySelector("#dynamic-box");
 
