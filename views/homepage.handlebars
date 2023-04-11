@@ -1,0 +1,62 @@
+<div class="full-page">
+  <div>
+    
+    <div class="row">
+      <div class="col-2 input-col">
+        <div>
+          <input placeholder="Enter Your Image Idea" id="term" />
+        </div>
+
+        <div>
+          <select name="picsize" id="pic-size">
+            <option value="">--Please Choose Image Size--</option>
+            <option value="256x256">Small</option>
+            <option value="512x512">Medium</option>
+            <option value="1024x1024">Large</option>
+
+          </select>
+        </div>
+        <div>
+
+          <button class="btn-chg" id="searchImg">Render Image</button>
+        </div>
+        <div class="d-flex justify-content-center" style="margin-top: 60px;">
+      <div
+        class="spinner-border"
+        style="display: none;"
+        role="status"
+        id="spinner"
+      >
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+      </div>
+
+      {{! <div class="col-2"></div> }}
+
+      <div class="image-style" id="dynamic-box">
+
+        <img id="image" src="/images/home.png" />
+      </div>
+      {{! <div class="col-2"></div></div> }}
+
+    </div>
+  </div>
+  <div class="text-center">
+    {{! <div class="col-4"></div>
+  <div class="col-4"></div> }}
+    <div classs="btn-placement">
+      <button class="btn btn-info" id="savebtn">Save Image</button>
+      <button class="btn btn-success">Edit</button>
+      <button id="share" class="btn btn-danger">Share With Community</button>
+    </div>
+  </div>
+</div>
+
+        <button class="btn btn-danger">Delete</button>
+        <button id="share" class="btn btn-info">Share With Community</button>
+    </div>
+</div></div>
+<script src="/js/imagesearch.js"></script>
+<script src="/js/community.js"></script>
+<script src='/js/saveimg.js'></script>
