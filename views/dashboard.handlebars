@@ -1,0 +1,12 @@
+<h1 style="text-align: center;">Your Saved Images</h1>
+<div class="">
+   <div class="dash-img">
+    {{#each plainData as |img|}}
+        <div class="">
+             <br>
+        <div class="">   <img class="dash-pic" src="{{img.image_url}}"/></div> <br>
+         <button class="btn btn-danger dash-btn" id="deleteImage">Delete Image</button>     
+        </div>
+    {{/each}}
+    </div>
+</div>

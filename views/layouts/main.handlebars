@@ -19,12 +19,12 @@
       
    <a href="/">   <img class="logo" src="/images/GarbanzoAI-logo.png" alt="logo"  /> </a>
       
-        <div class="move">
+        <div>
         {{#if logged_in}}
-          <a class="head-btn profile" href="/home">New Image</a>
-          <a class="head-btn profile" id="profile" href="/dasboard">Dashboard</a>
+          <a class="head-btn profile up-btn" href="/home">New Image</a>
+          <a class="head-btn profile up-btn" id="profile" href="/dashboard">Dashboard</a>
           
-          <button class="head-btn" id="logout">Logout</button>
+          <button class="head-btn up-btn" id="logout">Logout</button>
         {{else}}
           <div>
             <a class="login" href="/login">Login</a>
@@ -46,6 +46,6 @@
     {{#if logged_in}}
       <script src="/js/logout.js"></script>
     {{/if}}
-      <script src="/js/dashboard.js"></script>
+      {{!-- <script src="/js/dashboard.js"></script> --}}
   </body>
 </html>

@@ -9,7 +9,7 @@ const saveImage = async () => {
       }
     });
     if (!response.ok) {
-        errDisplay.innerHTML="error trying to save image please try agin"
+        errDisplay.innerHTML="Error trying to save image. Please try again."
       errDisplay.style.visibility='visibile'
    
         
@@ -17,7 +17,7 @@ const saveImage = async () => {
           errDisplay.style.visibility='hidden'
          },3000)
       } else {
-        errDisplay.innerHTML="Image Saved to Database"
+        errDisplay.innerHTML="Image saved to Dashboard."
         errDisplay.style.visibility='visibile'
      
           
@@ -29,7 +29,7 @@ const saveImage = async () => {
   } catch (error) {
     console.log(error);
   }
-
+  document.location.replace("/dashboard")
 };
 
 saveEl.addEventListener("click", saveImage);
