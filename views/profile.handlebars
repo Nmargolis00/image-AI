@@ -1,10 +1,10 @@
-<p>My Saved Photos</p>
-<div class="" id="imgDiv">
+<h1 class="text-center">My Saved Photos</h1>
+<div class="row" id="imgDiv" style="padding-left: 2%;">
     {{#each plainData as |img|}}
-        <div class="border">
+        <div class="col-3">
              <br>
-        <div class=""> <img class="" src={{img.image_url}} style="width: 10%;"/></div> <br>
-         <div class=""><button class="btn btn-danger"  id={{img.id}} >Delete Image</button></div>     
+        <div class=""> <img class="" src={{img.image_url}} style="width: 50%;"/></div> <br>
+         <div class="text-cente"><button class="btn btn-danger"  id={{img.id}} >Delete Image</button></div>     
         </div>
     {{/each}}
 </div>

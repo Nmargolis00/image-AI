@@ -46,6 +46,7 @@ router.get("/dasboard",withAuth, async(req, res) => {
     console.log(plainData.length,plainData);
     res.render("profile", {
       plainData,
+      logged_in: req.session.logged_in
     });
   } catch (error) {
     console.log(error);
