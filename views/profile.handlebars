@@ -1,10 +1,11 @@
-<p>This is the profile page.</p>
-<div class="">
+<p>My Saved Photos</p>
+<div class="" id="imgDiv">
     {{#each plainData as |img|}}
-        <div class="">
+        <div class="border">
              <br>
-        <div class="">   <img class="" src={{img.image_url}} style="width: 10%;"/></div> <br>
-         <div class=""><button class="btn btn-danger" id="deleteImage">Delete Image</button></div>     
+        <div class=""> <img class="" src={{img.image_url}} style="width: 10%;"/></div> <br>
+         <div class=""><button class="btn btn-danger"  id={{img.id}} >Delete Image</button></div>     
         </div>
     {{/each}}
 </div>
+<script src='/js/deleteimgs.js'></script>
