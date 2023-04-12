@@ -55,7 +55,7 @@ router.post("/community", async (req, res) => {
     const response = await Community.create({
       picture: photoUrl.url,
     });
-    console.log(response);
+
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json(error);
