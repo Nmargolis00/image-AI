@@ -11,9 +11,10 @@ router.get("/", async (req, res) => {
 
   
   const mapPhotos = getPhotos.map((one) => one.get({ plain: true }));
-  const orderPhotos = mapPhotos.reverse()
   
-  res.render("community", {pic: orderPhotos, logged_in: req.session.logged_in});
+  const orderPhotos = mapPhotos.reverse()
+  console.log(orderPhotos)
+  res.render("community", {pic:orderPhotos,logged_in: req.session.logged_in});
 }
 else {
   res.render("community")
@@ -37,15 +38,16 @@ router.get("/show-image", (req, res) => {
   res.render("show-image", { photo: req.session.photo, logged_in: req.session.logged_in });
 });
 
-router.get("/dasboard", async(req, res) => {
+router.get("/dasboard",withAuth, async(req, res) => {
   try {
     const response = await Image.findAll({
       where: { user_id: req.session.user_id },
     });
     const plainData = response.map((img) => img.get({ plain: true }));
-    console.log(plainData.length,plainData);
+    
     res.render("profile", {
       plainData,
+      logged_in: req.session.logged_in
     });
   } catch (error) {
     console.log(error);
