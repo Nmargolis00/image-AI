@@ -43,7 +43,8 @@
 
 # Images
 
-![Website Screen Shots](./assets/images/Webpage.png)
+![Community Page](./public/images/Website%20Screenshot%20Community%20Page.png);
+![Login Page](./public/images/Screenshot%20Login.png);
 
 # Description
 
