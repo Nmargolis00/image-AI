@@ -17,9 +17,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-router.post("/getimages", async (req, res) => {
-  
- 
+router.post("/getimages",withAuth, async (req, res) => {
   try {
     const response = await openai.createImage({
       prompt: req.body.prompt,
@@ -40,7 +38,7 @@ router.post("/getimages", async (req, res) => {
 });
 ;
 //save image to db
-router.post("/saveimage", async (req, res) => {
+router.post("/saveimage",withAuth, async (req, res) => {
   try {
     const photoUrl = await cloudinary.uploader.upload(req.session.current_image);
 
@@ -70,12 +68,12 @@ router.post("/community", async (req, res) => {
 //get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
 
 //delete saved photos
-router.delete("/getimage/:id", withAuth, async (req, res) => {
+router.delete("/delete",withAuth, async (req, res) => {
   try {
     const delImages = await Image.destroy({
       where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
+        id: req.body.imgid,
+       
       },
     });
     if (!delImages) {

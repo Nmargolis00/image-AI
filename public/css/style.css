@@ -149,7 +149,9 @@ flex-wrap: wrap;
   max-width: 256px;
 }
 
-
+.move {
+  margin-top: 20px;
+}
 
 .input-col {
   margin-left: 50px;
