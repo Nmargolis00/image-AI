@@ -5,7 +5,7 @@ require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-  organization: process.env.ORG_KEY,
+  
   apiKey: process.env.OPEN_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
@@ -17,8 +17,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-router.post("/getimages", async (req, res) => {
-  
+router.post("/getimages",withAuth, async (req, res) => {
   try {
     const response = await openai.createImage({
       prompt: req.body.prompt,
@@ -27,20 +26,24 @@ router.post("/getimages", async (req, res) => {
     });
 
     const image = response.data.data[0].url;
+    // console.log(image)
     req.session.save(() => {
       req.session.current_image = image;
       res.status(200).json({ photo: image });
     });
   } catch (error) {
-    console.error(error);
+  
     res.status(500).json(error);
   }
 });
+;
 //save image to db
-router.post("/saveimage", async (req, res) => {
+router.post("/saveimage",withAuth, async (req, res) => {
   try {
+    const photoUrl = await cloudinary.uploader.upload(req.session.current_image);
+
     const saveImage = await Image.create({
-      image_url: req.session.current_image,
+      image_url: photoUrl.url,
       user_id: req.session.user_id,
     });
     res.status(200).json(saveImage);
@@ -48,6 +51,7 @@ router.post("/saveimage", async (req, res) => {
     console.log(error);
   }
 });
+
 router.post("/community", async (req, res) => {
   try {
     const photoUrl = await cloudinary.uploader.upload(req.body.image_src);
@@ -55,6 +59,7 @@ router.post("/community", async (req, res) => {
     const response = await Community.create({
       picture: photoUrl.url,
     });
+  
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json(error);
@@ -62,15 +67,13 @@ router.post("/community", async (req, res) => {
 });
 //get main page. WE WILL NEED TO HAVE A SEARCH FOR THE IMAGES ONCE THAT IS BUILT
 
-
-
 //delete saved photos
-router.delete("/getimage/:id", withAuth, async (req, res) => {
+router.delete("/delete",withAuth, async (req, res) => {
   try {
     const delImages = await Image.destroy({
       where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
+        id: req.body.imgid,
+       
       },
     });
     if (!delImages) {

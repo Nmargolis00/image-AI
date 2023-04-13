@@ -2,7 +2,7 @@ const spinner = document.getElementById("spinner");
 const errDisplay=document.getElementById('errDisplay')
 const imageSearch = async () => {
   const prompt = document.querySelector("#term").value.trim();
-const hideImage = document.getElementById("image")
+
   const size = document.querySelector("#pic-size").value.trim();
   const dynamic = document.querySelector("#dynamic-box");
 
@@ -44,13 +44,13 @@ async function generateImageRequest(prompt, size) {
     });
 
     if (!response.ok) {
-      errDisplay.innerHTML="image not found please try another serach term"
+      // errDisplay.innerHTML="Image not found. Please try another search term."
     errDisplay.style.visibility='visibile'
     document.getElementById("spinner").style.display = "none";
       
-      setInterval(()=>{
-        errDisplay.style.visibility='hidden'
-       },3000)
+      // setInterval(()=>{
+      //   errDisplay.style.visibility='hidden'
+      //  },3000)
     } else {
       
       const imageUrl = await response.json();
@@ -62,7 +62,7 @@ async function generateImageRequest(prompt, size) {
     }
    
   } catch (error) {
-    console.log(console.log(error));
+    console.log(error);
   }
   
 }
