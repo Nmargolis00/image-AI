@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
 
 //post user info for sign up
 router.post("/signup", async (req, res) => {
-
+  
   try {
     const userData = await User.create({
       email: req.body.email, 

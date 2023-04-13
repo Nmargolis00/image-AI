@@ -5,7 +5,7 @@ require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-  organization: process.env.ORG_KEY,
+  
   apiKey: process.env.OPEN_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
@@ -26,12 +26,13 @@ router.post("/getimages",withAuth, async (req, res) => {
     });
 
     const image = response.data.data[0].url;
+    // console.log(image)
     req.session.save(() => {
       req.session.current_image = image;
       res.status(200).json({ photo: image });
     });
   } catch (error) {
-    console.error(error);
+  
     res.status(500).json(error);
   }
 });
@@ -39,8 +40,10 @@ router.post("/getimages",withAuth, async (req, res) => {
 //save image to db
 router.post("/saveimage",withAuth, async (req, res) => {
   try {
+    const photoUrl = await cloudinary.uploader.upload(req.session.current_image);
+
     const saveImage = await Image.create({
-      image_url: req.session.current_image,
+      image_url: photoUrl.url,
       user_id: req.session.user_id,
     });
     res.status(200).json(saveImage);
@@ -48,6 +51,7 @@ router.post("/saveimage",withAuth, async (req, res) => {
     console.log(error);
   }
 });
+
 router.post("/community", async (req, res) => {
   try {
     const photoUrl = await cloudinary.uploader.upload(req.body.image_src);
@@ -55,7 +59,7 @@ router.post("/community", async (req, res) => {
     const response = await Community.create({
       picture: photoUrl.url,
     });
-
+  
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json(error);
