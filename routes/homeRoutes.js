@@ -37,7 +37,7 @@ router.get("/show-image", (req, res) => {
   res.render("show-image", { photo: req.session.photo, logged_in: req.session.logged_in });
 });
 
-router.get("/dasboard",withAuth, async(req, res) => {
+router.get("/dashboard",withAuth, async(req, res) => {
   try {
     const response = await Image.findAll({
       where: { user_id: req.session.user_id },

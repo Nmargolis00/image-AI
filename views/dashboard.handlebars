@@ -1,12 +1,14 @@
 <h1 style="text-align: center;">Your Saved Images</h1>
 <div class="">
-   <div class="dash-img">
+   <div class="dash-img" id="imgDiv" >
     {{#each plainData as |img|}}
         <div class="">
              <br>
         <div class="">   <img class="dash-pic" src="{{img.image_url}}"/></div> <br>
-         <button class="btn btn-danger dash-btn" id="deleteImage">Delete Image</button>     
+                  <div class="text-cente"><button class="btn btn-danger"  id={{img.id}} >Delete Image</button></div>     
+     
         </div>
     {{/each}}
     </div>
 </div>
+<script src='/js/deleteimgs.js'></script>

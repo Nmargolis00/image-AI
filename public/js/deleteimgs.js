@@ -8,7 +8,7 @@ const deleteImg = async (imgid) => {
     });
   
     if (response.ok) {
-      window.location.replace("/dasboard");
+      window.location.replace("/dashboard");
     } else {
       alert(response.statusText);
     }
@@ -19,6 +19,6 @@ const deleteImg = async (imgid) => {
   mydiv.addEventListener("click", (event) => {
     if(event.target.tagName === 'BUTTON') {
     deleteImg(event.target.id)
-      //console.log(event.target.id)
+      console.log(event.target.id)
     }
   })
